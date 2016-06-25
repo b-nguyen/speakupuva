@@ -1,4 +1,4 @@
-var app = angular.module('speakupuva', []);
+var app = angular.module('speakupuva', ['ui.router']);
 
 app.controller('MainCtrl', [
 '$scope',
@@ -24,4 +24,21 @@ function($scope){
   $scope.incrementUpvotes = function(post){
     post.upvotes++;
   };
+  $scope.categories = ['academics', 'arts', 'cios', 'general'];
 }]);
+app.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise("/");
+  $stateProvider
+    .state('home', {
+      url: "/",
+      template: "<h1>We are home!</h1>"
+    })
+    .state('category', {
+      url: "/category/{categoryName}",
+      template: "<h1>We are in category {{category}}!",
+      controller: function($scope, $stateParams) {
+        $scope.category = $stateParams.categoryName;
+      }
+
+    })
+});

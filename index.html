@@ -3,9 +3,16 @@
   <head>
     <title>SpeakUpUVA:Angular</title>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
     <script src="app.js"></script>
   </head>
   <body ng-app='speakupuva' ng-controller='MainCtrl'>
+    <nav>
+      <a ui-sref="home">Home</a> |
+      <span ng-repeat="category in categories">
+        <a  ui-sref="category({categoryName: category})">{{ category }}</a> |
+      </span>
+    </nav>
     <form ng-submit="addPost()">
       <input type="text" placeholder="Title" ng-model="title"></input>
       <br>
@@ -23,5 +30,7 @@
       </span>
       - upvotes: {{post.upvotes}}
     </div>
+
+    <section ui-view></section>
   </body>
 </html>
